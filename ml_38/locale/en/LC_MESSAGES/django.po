@@ -1,0 +1,71 @@
+# English translations
+# Copyright (C) 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-16 03:27+0500\n"
+"PO-Revision-Date: 2026-05-16 02:37+0500\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\main\apps.py:8
+msgid "Main"
+msgstr "Main"
+
+#: .\main\models.py:5 .\main\models.py:14
+msgid "name"
+msgstr "Name"
+
+#: .\main\models.py:10
+msgid "Category"
+msgstr "Category"
+
+#: .\main\models.py:11
+msgid "Categories"
+msgstr "Categories"
+
+#: .\main\models.py:15
+msgid "image"
+msgstr "Image"
+
+#: .\main\models.py:16
+msgid "brand"
+msgstr "Brand"
+
+#: .\main\models.py:17
+msgid "details"
+msgstr "Details"
+
+#: .\main\models.py:18
+msgid "price"
+msgstr "Price"
+
+#: .\main\models.py:20
+msgid "quantity"
+msgstr "Quantity"
+
+#: .\main\models.py:21
+msgid "created at"
+msgstr "Created at"
+
+#: .\main\models.py:26
+msgid "Product"
+msgstr "Product"
+
+#: .\main\models.py:27
+msgid "Products"
+msgstr "Products"
+
+#: .\templates\index.html:4
+msgid "Bugun django loyihada JAZZMIN admin panelini va templatelarni ko'p tilli qilishni o'rgandik!"
+msgstr "Today we learned how to use the JAZZMIN admin panel and make templates multilingual in a Django project!"
+
+msgid "Bu tarjima qilinadi"
+msgstr "This will be translated"

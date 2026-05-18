@@ -1,0 +1,71 @@
+# Uzbek translations
+# Copyright (C) 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-16 03:26+0500\n"
+"PO-Revision-Date: 2026-05-16 02:37+0500\n"
+"Last-Translator: \n"
+"Language-Team: Uzbek\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\main\apps.py:8
+msgid "Main"
+msgstr "Asosiy"
+
+#: .\main\models.py:5 .\main\models.py:14
+msgid "name"
+msgstr "Nomi"
+
+#: .\main\models.py:10
+msgid "Category"
+msgstr "Kategoriya"
+
+#: .\main\models.py:11
+msgid "Categories"
+msgstr "Kategoriyalar"
+
+#: .\main\models.py:15
+msgid "image"
+msgstr "Rasm"
+
+#: .\main\models.py:16
+msgid "brand"
+msgstr "Brend"
+
+#: .\main\models.py:17
+msgid "details"
+msgstr "Tavsif"
+
+#: .\main\models.py:18
+msgid "price"
+msgstr "Narxi"
+
+#: .\main\models.py:20
+msgid "quantity"
+msgstr "Miqdori"
+
+#: .\main\models.py:21
+msgid "created at"
+msgstr "Yaratilgan "
+
+#: .\main\models.py:26
+msgid "Product"
+msgstr "Mahsulot"
+
+#: .\main\models.py:27
+msgid "Products"
+msgstr "Mahsulotlar"
+
+#: .\templates\index.html:4
+msgid "Bugun django loyihada JAZZMIN admin panelini va templatelarni ko'p tilli qilishni o'rgandik!"
+msgstr "Bugun django loyihada JAZZMIN admin panelini va templatelarni ko'p tilli qilishni o'rgandik!"
+
+msgid "Bu tarjima qilinadi"
+msgstr "Bu tarjima qilinadi"

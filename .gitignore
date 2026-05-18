@@ -1,0 +1,27 @@
+# Virtual Environment
+venv/
+
+# Maxfiy ma'lumotlar
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Database
+db.sqlite3
+
+# Media fayllar
+media/
+
+# PyCharm
+.idea/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Static
+staticfiles/
+static_root/
