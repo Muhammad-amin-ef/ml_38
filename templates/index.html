@@ -1,118 +1,157 @@
 {% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Bosh sahifa" %}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<p>
-    {% trans "Bugun django loyihada JAZZMIN admin panelini va templatelarni ko'p tilli qilishni o'rgandik!" %}
-</p>
+        body {
+            min-height: 100vh;
+            background: #0f0f0f;
+            color: #e8e8e8;
+            font-family: 'Courier New', monospace;
+            padding: 40px;
+        }
 
-<p>
-    bu tarjima qilinmaydi
-</p>
+        /* --- NAV --- */
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 60px;
+        }
 
-<p>
-    {% trans "Bu tarjima qilinadi" %}
-</p>
+        /* --- MATNLAR --- */
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-<br><br><br>
-<hr>
+        .content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 16px;
+            border-left: 2px solid #444;
+            color: #ccc;
+        }
 
-<style>
-.lang-selector { position: relative; width: 220px; font-family: sans-serif; }
-.lang-trigger {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 14px; cursor: pointer;
-    background: #fff; border: 1px solid #ddd;
-    border-radius: 12px; transition: border-color 0.2s;
-    user-select: none;
-}
-.lang-trigger:hover { border-color: #aaa; }
-.lang-trigger.open { border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-color: #aaa; }
-.lang-flag { font-size: 20px; line-height: 1; }
-.lang-name { flex: 1; font-size: 14px; font-weight: 500; color: #222; }
-.lang-chevron { font-size: 14px; color: #888; transition: transform 0.3s cubic-bezier(.4,0,.2,1); }
-.lang-trigger.open .lang-chevron { transform: rotate(180deg); }
-.lang-dropdown {
-    position: absolute; top: 100%; left: 0; right: 0;
-    background: #fff; border: 1px solid #aaa;
-    border-top: none;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s ease;
-    opacity: 0; z-index: 100;
-}
-.lang-dropdown.open { max-height: 300px; opacity: 1; }
-.lang-option {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 14px; cursor: pointer;
-    border-top: 1px solid #eee;
-    transition: background 0.15s;
-}
-.lang-option:hover { background: #f5f5f5; }
-.lang-option.active { background: #f0f0f0; }
-.lang-option .opt-name { font-size: 13px; color: #222; flex: 1; }
-.lang-check { font-size: 13px; color: #555; opacity: 0; transition: opacity 0.15s; }
-.lang-option.active .lang-check { opacity: 1; }
-</style>
+        .content p.no-translate {
+            border-left-color: #333;
+            color: #555;
+            font-style: italic;
+        }
 
-<form action="{% url 'set_language' %}" method="post" id="langForm">
-    {% csrf_token %}
-    <input name="next" type="hidden" value="{{ request.get_full_path }}">
-    <input type="hidden" name="language" id="langInput">
+        /* --- TIL TANLASH --- */
+        .lang-selector { position: relative; width: 160px; }
 
+        .lang-trigger {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 14px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+            transition: border-color 0.2s;
+        }
+        .lang-trigger:hover { border-color: #666; }
+        .lang-trigger.open { border-color: #666; border-radius: 8px 8px 0 0; }
+
+        .lang-trigger span { font-size: 13px; color: #aaa; font-family: 'Courier New', monospace; }
+        .lang-chevron { transition: transform 0.3s; font-size: 10px !important; }
+        .lang-trigger.open .lang-chevron { transform: rotate(180deg); }
+
+        .lang-dropdown {
+            position: absolute; top: 100%; left: 0; right: 0;
+            background: #1a1a1a;
+            border: 1px solid #666; border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s, opacity 0.2s;
+            opacity: 0; z-index: 100;
+        }
+        .lang-dropdown.open { max-height: 300px; opacity: 1; }
+
+        .lang-option {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 9px 14px;
+            border-top: 1px solid #222;
+            cursor: pointer;
+            font-size: 13px; color: #aaa;
+            font-family: 'Courier New', monospace;
+            transition: background 0.15s, color 0.15s;
+        }
+        .lang-option:hover { background: #222; color: #fff; }
+        .lang-option.active { color: #fff; }
+        .lang-check { opacity: 0; font-size: 11px; color: #666; }
+        .lang-option.active .lang-check { opacity: 1; }
+
+        /* --- DIVIDER --- */
+        hr {
+            border: none;
+            border-top: 1px solid #1e1e1e;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
     {% get_current_language as LANGUAGE_CODE %}
     {% get_available_languages as LANGUAGES %}
 
-    <div class="lang-selector" id="langSelector">
-        <div class="lang-trigger" id="langTrigger">
-            <span class="lang-flag" id="selectedFlag"></span>
-            <span class="lang-name" id="selectedName"></span>
-            <span class="lang-chevron">▾</span>
-        </div>
-        <div class="lang-dropdown" id="langDropdown">
-            {% for code, name in LANGUAGES %}
-            <div class="lang-option {% if code == LANGUAGE_CODE %}active{% endif %}"
-                 data-code="{{ code }}"
-                 data-name="{{ name }}"
-                 data-flag="{% if code == 'uz' %}🇺🇿{% elif code == 'en' %}🇬🇧{% elif code == 'ru' %}🇷🇺{% elif code == 'ar' %}🇸🇦{% elif code == 'hi' %}🇮🇳{% elif code == 'zh' %}🇨🇳{% endif %}">
-                <span class="lang-flag">
-                    {% if code == 'uz' %}🇺🇿{% elif code == 'en' %}🇬🇧{% elif code == 'ru' %}🇷🇺{% elif code == 'ar' %}🇸🇦{% elif code == 'hi' %}🇮🇳{% elif code == 'zh' %}🇨🇳{% endif %}
-                </span>
-                <span class="opt-name">{{ name }}</span>
-                <span class="lang-check">✓</span>
+    <form action="{% url 'set_language' %}" method="post" id="langForm">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="/">
+        <input type="hidden" name="language" id="langInput">
+
+        <div class="lang-selector" id="langSelector">
+            <div class="lang-trigger" id="langTrigger">
+                <span id="selectedName"></span>
+                <span class="lang-chevron">▾</span>
             </div>
-            {% endfor %}
+            <div class="lang-dropdown" id="langDropdown">
+                {% for code, name in LANGUAGES %}
+                <div class="lang-option {% if code == LANGUAGE_CODE %}active{% endif %}"
+                     data-code="{{ code }}" data-name="{{ name }}">
+                    <span>{{ name }}</span>
+                    <span class="lang-check">✓</span>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</nav>
+
+<div class="content">
+    <p>{% trans "Bugun django loyihada JAZZMIN admin panelini va templatelarni ko'p tilli qilishni o'rgandik!" %}</p>
+    <p class="no-translate">bu tarjima qilinmaydi</p>
+    <p>{% trans "Bu tarjima qilinadi" %}</p>
+</div>
 
 <script>
     const trigger = document.getElementById('langTrigger');
     const dropdown = document.getElementById('langDropdown');
-    const selectedFlag = document.getElementById('selectedFlag');
     const selectedName = document.getElementById('selectedName');
     const langInput = document.getElementById('langInput');
 
     const active = document.querySelector('.lang-option.active');
     if (active) {
-        selectedFlag.textContent = active.dataset.flag;
         selectedName.textContent = active.dataset.name;
         langInput.value = active.dataset.code;
     }
 
     trigger.addEventListener('click', () => {
-        const isOpen = dropdown.classList.contains('open');
-        dropdown.classList.toggle('open', !isOpen);
-        trigger.classList.toggle('open', !isOpen);
+        dropdown.classList.toggle('open');
+        trigger.classList.toggle('open');
     });
 
     document.querySelectorAll('.lang-option').forEach(opt => {
         opt.addEventListener('click', () => {
-            selectedFlag.textContent = opt.dataset.flag;
-            selectedName.textContent = opt.dataset.name;
             langInput.value = opt.dataset.code;
-            dropdown.classList.remove('open');
-            trigger.classList.remove('open');
             document.getElementById('langForm').submit();
         });
     });
@@ -124,3 +163,6 @@
         }
     });
 </script>
+
+</body>
+</html>
